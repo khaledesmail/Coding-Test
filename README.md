@@ -1,61 +1,73 @@
-**Coding Test for Senior Node.js Developer**
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+</p>
 
-**Overview**
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-In this coding test, you will be asked to build a simple RESTful API using Node.js, NestJS, TypeScript, and PostgreSQL. The API will allow users to create, read, update, and delete (CRUD) posts. Each post will have a title, content, author, and timestamp. You will also need to write unit and e2e tests for the API using Jest and Testcontainers. You will also need to use Docker and Docker Compose to containerize the application and the database.
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+    <p align="center">
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
+<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
+<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
+  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
+    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
+</p>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-**Requirements**
+## Description
 
--   You should use Node.js version 14 or higher, NestJS version 8 or higher, TypeScript version 4 or higher, and PostgreSQL version 13 or higher.
--   You should use TypeORM and the @nestjs/typeorm module to connect to the PostgreSQL database and define the entities and repositories.
--   You should use the @nestjs/common, @nestjs/swagger, and @nestjs/config modules to handle common tasks such as validation, error handling, documentation, and configuration.
--   You should use the @nestjs/testing module and Jest to write unit and e2e tests for the API. You should use Testcontainers and the  @databases/pg-test library to run tests against a real PostgreSQL database using Docker.
--   You should use Docker and Docker Compose to create a container for the application and the database. You should use environment variables to store sensitive information such as database credentials.
--   You should use Git to version control your code and commit your changes frequently and with meaningful messages.
--   You should follow the coding standards and best practices of Node.js, TypeScript, and NestJS. You should use ESLint and Prettier to format and lint your code.
--   You should write clear and concise comments and documentation for your code.
--   You should use the @nestjs/swagger module to generate an interactive  APIdocumentation using OpenAPI.\
-**Instructions**
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
--   Fork this repository and clone it to your local machine.
--   Create a new branch with your name and the date of the test (e.g., john-doe-2024-02-14).
--   Install the dependencies using npm install.
--   Create a .env file in the root of the project and add the following variables:
+## Installation
 
-POSTGRES_USER=postgres
+```bash
+$ npm install
+```
 
-POSTGRES_PASSWORD=postgres
+## Running the app
 
-POSTGRES_DB=posts
+```bash
+# development
+$ npm run start
 
-POSTGRES_PORT=5432
+# watch mode
+$ npm run start:dev
 
--   Run docker-compose up -d to start the PostgreSQL container.
--   Run npm run start:dev to start the application in development mode.
--   Implement the following endpoints for the posts API:
+# production mode
+$ npm run start:prod
+```
 
--   GET /posts - Get all posts
--   GET /posts/:id - Get a post by id
--   POST /posts - Create a new post
--   PUT /posts/:id - Update a post by id
--   DELETE /posts/:id - Delete a post by id
+## Test
 
-- Add authentication and authorization features to the API using JWT and Passport. Require users to register and login before they can create, update, or delete posts. Assign different roles and permissions to users, such as admin, editor, or reader. Use the @nestjs/passport and @nestjs/jwt modules to implement this functionality
+```bash
+# unit tests
+$ npm run test
 
--   Please design the api with low coupling between components and use onion or clean architecture to isolate business logic into its separate use cases.
--   Write unit and e2e tests for the API using Jest and Testcontainers. You should achieve at least 80% code coverage.
--   Run npm run test to run the tests and npm run test:cov to generate the test coverage report.
--   Run npm run build to build the application for production.
--   Run npm run start:prod to start the application in production mode.
--   Run npm run lint to check the code quality and npm run format to format the code.
--   Push your code to your forked repository and create a pull request to the original repository.
--   How can we scale this users service to serve 10000 then 1M users? (Think and write your answer in readme file.)
+# e2e tests
+$ npm run test:e2e
 
-**Evaluation Criteria**
+# test coverage
+$ npm run test:cov
+```
 
--   The functionality and correctness of the API and the tests
--   The code quality, readability, and maintainability
--   The use of coding standards and best practices
--   The use of appropriate tools and libraries
--   The documentation and comments
--   The commit history and messages
+## Support
+
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+
+## Stay in touch
+
+- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
+
+## License
+
+Nest is [MIT licensed](LICENSE).
