@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { PostsModule } from './posts/posts.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'; // Import SwaggerModule and DocumentBuilder
 
 @Module({
   imports: [
@@ -23,4 +24,20 @@ import { ConfigModule } from '@nestjs/config';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  // Add a method to initialize Swagger documentation
+  static initializeSwagger(app) {
+    const options = new DocumentBuilder()
+      .setTitle('Posts CRUD API')
+      .setDescription('API documentation for the Posts CRUD API')
+      .setVersion('1.0')
+      .addTag('posts') // Add a tag for your posts module
+      .build();
+
+    const document = SwaggerModule.createDocument(app, options, {
+      include: [PostsModule], // Include your modules here
+    });
+
+    SwaggerModule.setup('api', app, document);
+  }
+}
