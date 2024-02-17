@@ -24,6 +24,7 @@ export class PostsController {
     try {
       return await this.postsService.findAll();
     } catch (error) {
+      console.log('error', error);
       throw new InternalServerErrorException('Unable to fetch posts');
     }
   }

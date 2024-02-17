@@ -19,7 +19,8 @@ export class PostsService {
     try {
       return await this.postRepository.find();
     } catch (error) {
-      throw new InternalServerErrorException('Unable to fetch posts');
+      console.log('error', error);
+      throw new InternalServerErrorException(`Unable to fetch posts: ${error}`);
     }
   }
 
@@ -35,7 +36,7 @@ export class PostsService {
 
       return post;
     } catch (error) {
-      throw new InternalServerErrorException('Unable to fetch post');
+      throw new InternalServerErrorException(`Unable to fetch post: ${error}`);
     }
   }
 
@@ -44,26 +45,27 @@ export class PostsService {
       const post = this.postRepository.create(createPostDto);
       return await this.postRepository.save(post);
     } catch (error) {
-      throw new InternalServerErrorException('Unable to create post');
+      throw new InternalServerErrorException(`Unable to create post: ${error}`);
     }
   }
 
   async update(id: number, updatePostDto: UpdatePostDto) {
     try {
       await this.postRepository.update(id, updatePostDto);
-      return await this.findOne(id); // Return the updated post
+      return await this.findOne(id);
     } catch (error) {
-      throw new InternalServerErrorException('Unable to update post');
+      console.log('update', error);
+      throw new InternalServerErrorException(`Unable to update post: ${error}`);
     }
   }
 
   async remove(id: number) {
     try {
-      const post = await this.findOne(id); // Validate post existence
+      const post = await this.findOne(id);
       await this.postRepository.delete(id);
       return post;
     } catch (error) {
-      throw new InternalServerErrorException('Unable to delete post');
+      throw new InternalServerErrorException(`Unable to delete post: ${error}`);
     }
   }
 }
