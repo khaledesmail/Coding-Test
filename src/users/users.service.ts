@@ -1,6 +1,4 @@
-// users.service.ts
-
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
@@ -14,11 +12,19 @@ export class UsersService {
   ) {}
 
   async findOne(username: string): Promise<User | undefined> {
-    return this.userRepository.findOne({ where: { username } });
+    try {
+      return this.userRepository.findOne({ where: { username } });
+    } catch (error) {
+      throw new InternalServerErrorException(`Unable to fetch user: ${error}`);
+    }
   }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-    const newUser = this.userRepository.create(createUserDto);
-    return this.userRepository.save(newUser);
+    try {
+      const newUser = this.userRepository.create(createUserDto);
+      return this.userRepository.save(newUser);
+    } catch (error) {
+      throw new InternalServerErrorException(`Unable to create user: ${error}`);
+    }
   }
 }

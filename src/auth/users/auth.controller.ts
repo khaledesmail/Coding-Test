@@ -1,8 +1,8 @@
 // auth.controller.ts
 
-import { Controller, Post, Request } from '@nestjs/common';
+import { Controller, Post, Request, HttpCode } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { User } from '../users/entities/user.entity';
+import { User } from '../../users/entities/user.entity';
 
 @Controller('auth')
 export class AuthController {
@@ -14,6 +14,7 @@ export class AuthController {
   }
 
   @Post('login')
+  @HttpCode(200)
   async login(@Request() req): Promise<{ access_token: string }> {
     return this.authService.login(req.body);
   }

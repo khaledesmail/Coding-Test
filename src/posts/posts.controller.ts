@@ -9,11 +9,13 @@ import {
   NotFoundException,
   InternalServerErrorException,
   UseGuards,
+  SetMetadata,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { RolesGuard } from '../auth/roles.guard';
 
 @Controller('posts')
 export class PostsController {
@@ -31,6 +33,8 @@ export class PostsController {
 
   @UseGuards(JwtAuthGuard)
   @Get(':id')
+  @UseGuards(RolesGuard)
+  @SetMetadata('roles', ['admin', 'editor', 'reader'])
   async findOne(@Param('id') id: string) {
     try {
       return await this.postsService.findOne(+id);
@@ -44,6 +48,8 @@ export class PostsController {
 
   @UseGuards(JwtAuthGuard)
   @Post()
+  @UseGuards(RolesGuard)
+  @SetMetadata('roles', ['admin', 'editor'])
   async create(@Body() createPostDto: CreatePostDto) {
     try {
       return await this.postsService.create(createPostDto);
@@ -54,6 +60,8 @@ export class PostsController {
 
   @UseGuards(JwtAuthGuard)
   @Put(':id')
+  @UseGuards(RolesGuard)
+  @SetMetadata('roles', ['admin', 'editor'])
   async update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
     try {
       return await this.postsService.update(+id, updatePostDto);
@@ -67,6 +75,8 @@ export class PostsController {
 
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
+  @UseGuards(RolesGuard)
+  @SetMetadata('roles', ['admin'])
   async remove(@Param('id') id: string) {
     try {
       return await this.postsService.remove(+id);

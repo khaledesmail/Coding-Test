@@ -1,6 +1,7 @@
 // database-config.service.ts
 import { Injectable } from '@nestjs/common';
 import { TypeOrmOptionsFactory, TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { join } from 'path';
 
 @Injectable()
 export class DatabaseConfigService implements TypeOrmOptionsFactory {
@@ -12,7 +13,7 @@ export class DatabaseConfigService implements TypeOrmOptionsFactory {
       username: process.env.POSTGRES_USER || 'your_username',
       password: process.env.POSTGRES_PASSWORD || 'your_password',
       database: process.env.POSTGRES_DB || 'your_database_name',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      entities: [join(__dirname, '../**/*.entity{.ts,.js}')],
       synchronize: true,
     };
   }

@@ -7,6 +7,7 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { Post } from './entities/post.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { JwtService } from '@nestjs/jwt';
 
 describe('PostsController', () => {
   let controller: PostsController;
@@ -29,7 +30,7 @@ describe('PostsController', () => {
         TypeOrmModule.forFeature([Post]),
       ],
       controllers: [PostsController],
-      providers: [PostsService],
+      providers: [PostsService, JwtService],
     }).compile();
     controller = module.get<PostsController>(PostsController);
     service = module.get<PostsService>(PostsService);

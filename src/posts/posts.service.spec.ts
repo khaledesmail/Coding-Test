@@ -7,6 +7,7 @@ import { Post } from './entities/post.entity';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { JwtService } from '@nestjs/jwt';
 
 describe('PostsService', () => {
   let service: PostsService;
@@ -28,7 +29,7 @@ describe('PostsService', () => {
         }),
         TypeOrmModule.forFeature([Post]),
       ],
-      providers: [PostsService],
+      providers: [PostsService, JwtService],
     }).compile();
 
     service = module.get<PostsService>(PostsService);
