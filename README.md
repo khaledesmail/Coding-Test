@@ -1,73 +1,109 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# NestJS CRUD API with PostgreSQL
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This project is a simple CRUD API built using Node.js, NestJS, TypeScript, and PostgreSQL. It allows users to manage posts with features like creating, reading, updating, and deleting posts.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Prerequisites
 
-## Description
+- Node.js (v18)
+- Docker and Docker Compose
+- PostgreSQL (v15)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Getting Started
 
-## Installation
+1. **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/khaledesmail/Coding-Test.git
+    cd Coding-Test
+    ```
+
+2. **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+3. **Create a `.env` file:**
+
+    ```env
+    add your own credentials
+    ```
+
+4. **Start PostgreSQL and App container:**
+
+    ```bash
+    docker-compose up -d
+    ```
+
+5. **Run the application in development mode:**
+
+    ```bash
+    npm run start:dev
+    ```
+
+6. **Access Swagger Documentation:**
+
+    Open [http://localhost:3000/api](http://localhost:3000/api) to view the Swagger documentation.
+
+## API Endpoints
+
+- `GET /posts` - Get all posts
+- `GET /posts/:id` - Get a post by id
+- `POST /posts` - Create a new post
+- `PUT /posts/:id` - Update a post by id
+- `DELETE /posts/:id` - Delete a post by id
+
+- `POST /auth/register` - register a user
+- `POST /auth/login` - login and get access token
+
+## Authentication and Authorization
+
+- JWT and Passport are used for authentication
+- Users must register and login to create, update, or delete posts
+- Different roles (admin, editor, reader) are assigned to users
+
+## Unit Tests
+
+Run unit tests with:
 
 ```bash
-$ npm install
+npm run test
+npm run test:cov
 ```
-
-## Running the app
-
+##  Build and Production
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm run build
+npm run start:prod
 ```
 
-## Test
+## Scaling the User Service
 
-```bash
-# unit tests
-$ npm run test
+As the user base grows, it's essential to consider and implement strategies for scaling the user service. Below are potential strategies to handle increased loads:
 
-# e2e tests
-$ npm run test:e2e
+### 1. Load Balancing
 
-# test coverage
-$ npm run test:cov
-```
+Implementing load balancing distributes incoming traffic across multiple instances of your application. This ensures that no single instance becomes a bottleneck and allows for better resource utilization.
 
-## Support
+### 2. Database Sharding
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Database sharding involves horizontally partitioning your database to distribute data across multiple database servers. Each shard handles a subset of the data, reducing the load on individual database servers.
 
-## Stay in touch
+### 3. Caching Mechanisms
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Utilize caching mechanisms to store frequently accessed data in a fast.
 
-## License
+### 4. Horizontal Scaling
 
-Nest is [MIT licensed](LICENSE).
+Consider deploying your application on multiple servers or containers to horizontally scale the user service.
+
+### 5. Content Delivery Networks (CDN)
+
+Use a Content Delivery Network to cache and deliver static assets, such as images and scripts, closer to users. This reduces latency and enhances the overall performance of your application.
+
+### 6. Efficient Indexing and Query Optimization
+
+Optimize database queries by ensuring proper indexing and analyzing query performance. This helps maintain fast response times even as the dataset grows.
+
+### 7. Autoscaling
+
+Leverage cloud providers' autoscaling features to automatically adjust the number of instances based on traffic and load. This ensures that your application can dynamically handle varying workloads.

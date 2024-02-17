@@ -39,7 +39,7 @@ describe('UsersController', () => {
   });
 
   describe('register', () => {
-    it('should register a new user', async () => {
+    it('should list all  user', async () => {
       const createUserDto: CreateUserDto = {
         username: 'newuser',
         password: 'newpassword',
