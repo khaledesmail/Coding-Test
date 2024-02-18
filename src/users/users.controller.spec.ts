@@ -20,7 +20,7 @@ describe('UsersController', () => {
           port: 5432,
           username: 'postgres',
           password: 'postgres',
-          database: 'posts',
+          database: 'test-post',
           entities: [User],
           synchronize: true,
         }),
@@ -56,9 +56,5 @@ describe('UsersController', () => {
       expect(service.create).toHaveBeenCalledWith(createUserDto);
       expect(result).toBe(createdUser);
     });
-  });
-
-  afterAll(async () => {
-    // Clean up resources
   });
 });

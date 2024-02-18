@@ -24,7 +24,7 @@ describe.only('AuthService', () => {
           port: 5432,
           username: 'postgres',
           password: 'postgres',
-          database: 'posts',
+          database: 'test-post',
           entities: [Post],
           synchronize: true,
         }),

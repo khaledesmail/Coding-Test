@@ -15,20 +15,16 @@ export class RolesGuard implements CanActivate {
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
     const roles = this.reflector.get<string[]>('roles', context.getHandler());
-    console.log('rolle', roles);
     if (!roles) {
       return true; // No roles specified, allow access
     }
-
     const request = context.switchToHttp().getRequest();
     const token = request.headers.authorization?.replace('Bearer ', '');
-
     if (!token) {
       return false; // Token not provided, deny access
     }
     const decoded = this.jwtService.verify(token, { publicKey: 'mysecretkey' });
     const userRole = decoded.role;
-
     if (!userRole) {
       return false; // User or role not defined, deny access
     }

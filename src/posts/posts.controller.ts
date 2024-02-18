@@ -26,11 +26,9 @@ export class PostsController {
     try {
       return await this.postsService.findAll();
     } catch (error) {
-      console.log('error', error);
       throw new InternalServerErrorException('Unable to fetch posts');
     }
   }
-
   @UseGuards(JwtAuthGuard)
   @Get(':id')
   @UseGuards(RolesGuard)
@@ -45,7 +43,6 @@ export class PostsController {
       throw new InternalServerErrorException('Unable to fetch post');
     }
   }
-
   @UseGuards(JwtAuthGuard)
   @Post()
   @UseGuards(RolesGuard)
@@ -57,7 +54,6 @@ export class PostsController {
       throw new InternalServerErrorException('Unable to create post');
     }
   }
-
   @UseGuards(JwtAuthGuard)
   @Put(':id')
   @UseGuards(RolesGuard)
@@ -72,7 +68,6 @@ export class PostsController {
       throw new InternalServerErrorException('Unable to update post');
     }
   }
-
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
   @UseGuards(RolesGuard)

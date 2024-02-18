@@ -29,7 +29,7 @@ This project is a simple CRUD API built using Node.js, NestJS, TypeScript, and P
     add your own credentials
     ```
 
-4. **Start PostgreSQL and App container:**
+4. **Start Backend Service (NestJs) and PostgreSQL:**
 
     ```bash
     docker-compose up -d
@@ -40,6 +40,7 @@ This project is a simple CRUD API built using Node.js, NestJS, TypeScript, and P
     ```bash
     npm run start:dev
     ```
+Make sure you have PostgreSQL running
 
 6. **Access Swagger Documentation:**
 
@@ -70,6 +71,8 @@ Run unit tests with:
 npm run test
 npm run test:cov
 ```
+I have 84.61% Funcs coverage
+
 ##  Build and Production
 ```bash
 npm run build

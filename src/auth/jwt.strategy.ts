@@ -12,10 +12,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: configService.get('JWT_SECRET'),
+      secretOrKey:
+        process.env.NODE_ENV === 'test'
+          ? 'test-secret'
+          : configService.get('JWT_SECRET'),
     });
   }
-
   async validate(payload: any): Promise<any> {
     const user = await this.userService.findOne(payload.username);
     if (!user) {

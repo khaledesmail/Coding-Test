@@ -7,5 +7,6 @@
     "^.+\\.(t|j)s$": "ts-jest"
   },
   "coverageDirectory": "../coverage",
-  "setupFilesAfterEnv": ["./test/setup.ts"]
+  "setupFiles": ["./setup.ts"],
+  "setupFilesAfterEnv": ["./setup.ts"]
 }

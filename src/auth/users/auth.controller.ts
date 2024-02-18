@@ -12,7 +12,6 @@ export class AuthController {
   async register(@Request() req): Promise<User> {
     return this.authService.register(req.body);
   }
-
   @Post('login')
   @HttpCode(200)
   async login(@Request() req): Promise<{ access_token: string }> {

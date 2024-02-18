@@ -18,7 +18,6 @@ export class UsersService {
       throw new InternalServerErrorException(`Unable to fetch user: ${error}`);
     }
   }
-
   async create(createUserDto: CreateUserDto): Promise<User> {
     try {
       const newUser = this.userRepository.create(createUserDto);

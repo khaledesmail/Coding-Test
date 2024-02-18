@@ -14,16 +14,13 @@ export class PostsService {
     @InjectRepository(Post)
     private readonly postRepository: Repository<Post>,
   ) {}
-
   async findAll() {
     try {
       return await this.postRepository.find();
     } catch (error) {
-      console.log('error', error);
       throw new InternalServerErrorException(`Unable to fetch posts: ${error}`);
     }
   }
-
   async findOne(id: number) {
     try {
       const post = await this.postRepository.findOne({
@@ -33,13 +30,11 @@ export class PostsService {
       if (!post) {
         throw new NotFoundException(`Post with ID ${id} not found`);
       }
-
       return post;
     } catch (error) {
       throw new InternalServerErrorException(`Unable to fetch post: ${error}`);
     }
   }
-
   async create(createPostDto: CreatePostDto) {
     try {
       const post = this.postRepository.create(createPostDto);
@@ -48,17 +43,14 @@ export class PostsService {
       throw new InternalServerErrorException(`Unable to create post: ${error}`);
     }
   }
-
   async update(id: number, updatePostDto: UpdatePostDto) {
     try {
       await this.postRepository.update(id, updatePostDto);
       return await this.findOne(id);
     } catch (error) {
-      console.log('update', error);
       throw new InternalServerErrorException(`Unable to update post: ${error}`);
     }
   }
-
   async remove(id: number) {
     try {
       const post = await this.findOne(id);
