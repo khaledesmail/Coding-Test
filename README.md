@@ -1,61 +1,112 @@
-**Coding Test for Senior Node.js Developer**
+# NestJS CRUD API with PostgreSQL
 
-**Overview**
+This project is a simple CRUD API built using Node.js, NestJS, TypeScript, and PostgreSQL. It allows users to manage posts with features like creating, reading, updating, and deleting posts.
 
-In this coding test, you will be asked to build a simple RESTful API using Node.js, NestJS, TypeScript, and PostgreSQL. The API will allow users to create, read, update, and delete (CRUD) posts. Each post will have a title, content, author, and timestamp. You will also need to write unit and e2e tests for the API using Jest and Testcontainers. You will also need to use Docker and Docker Compose to containerize the application and the database.
+## Prerequisites
 
-**Requirements**
+- Node.js (v18)
+- Docker and Docker Compose
+- PostgreSQL (v15)
 
--   You should use Node.js version 14 or higher, NestJS version 8 or higher, TypeScript version 4 or higher, and PostgreSQL version 13 or higher.
--   You should use TypeORM and the @nestjs/typeorm module to connect to the PostgreSQL database and define the entities and repositories.
--   You should use the @nestjs/common, @nestjs/swagger, and @nestjs/config modules to handle common tasks such as validation, error handling, documentation, and configuration.
--   You should use the @nestjs/testing module and Jest to write unit and e2e tests for the API. You should use Testcontainers and the  @databases/pg-test library to run tests against a real PostgreSQL database using Docker.
--   You should use Docker and Docker Compose to create a container for the application and the database. You should use environment variables to store sensitive information such as database credentials.
--   You should use Git to version control your code and commit your changes frequently and with meaningful messages.
--   You should follow the coding standards and best practices of Node.js, TypeScript, and NestJS. You should use ESLint and Prettier to format and lint your code.
--   You should write clear and concise comments and documentation for your code.
--   You should use the @nestjs/swagger module to generate an interactive  APIdocumentation using OpenAPI.\
-**Instructions**
+## Getting Started
 
--   Fork this repository and clone it to your local machine.
--   Create a new branch with your name and the date of the test (e.g., john-doe-2024-02-14).
--   Install the dependencies using npm install.
--   Create a .env file in the root of the project and add the following variables:
+1. **Clone the repository:**
 
-POSTGRES_USER=postgres
+    ```bash
+    git clone https://github.com/khaledesmail/Coding-Test.git
+    cd Coding-Test
+    ```
 
-POSTGRES_PASSWORD=postgres
+2. **Install dependencies:**
 
-POSTGRES_DB=posts
+    ```bash
+    npm install
+    ```
 
-POSTGRES_PORT=5432
+3. **Create a `.env` file:**
 
--   Run docker-compose up -d to start the PostgreSQL container.
--   Run npm run start:dev to start the application in development mode.
--   Implement the following endpoints for the posts API:
+    ```env
+    add your own credentials
+    ```
 
--   GET /posts - Get all posts
--   GET /posts/:id - Get a post by id
--   POST /posts - Create a new post
--   PUT /posts/:id - Update a post by id
--   DELETE /posts/:id - Delete a post by id
+4. **Start Backend Service (NestJs) and PostgreSQL:**
 
-- Add authentication and authorization features to the API using JWT and Passport. Require users to register and login before they can create, update, or delete posts. Assign different roles and permissions to users, such as admin, editor, or reader. Use the @nestjs/passport and @nestjs/jwt modules to implement this functionality
+    ```bash
+    docker-compose up -d
+    ```
 
--   Please design the api with low coupling between components and use onion or clean architecture to isolate business logic into its separate use cases.
--   Write unit and e2e tests for the API using Jest and Testcontainers. You should achieve at least 80% code coverage.
--   Run npm run test to run the tests and npm run test:cov to generate the test coverage report.
--   Run npm run build to build the application for production.
--   Run npm run start:prod to start the application in production mode.
--   Run npm run lint to check the code quality and npm run format to format the code.
--   Push your code to your forked repository and create a pull request to the original repository.
--   How can we scale this users service to serve 10000 then 1M users? (Think and write your answer in readme file.)
+5. **Run the application in development mode:**
 
-**Evaluation Criteria**
+    ```bash
+    npm run start:dev
+    ```
+Make sure you have PostgreSQL running
 
--   The functionality and correctness of the API and the tests
--   The code quality, readability, and maintainability
--   The use of coding standards and best practices
--   The use of appropriate tools and libraries
--   The documentation and comments
--   The commit history and messages
+6. **Access Swagger Documentation:**
+
+    Open [http://localhost:3000/api](http://localhost:3000/api) to view the Swagger documentation.
+
+## API Endpoints
+
+- `GET /posts` - Get all posts
+- `GET /posts/:id` - Get a post by id
+- `POST /posts` - Create a new post
+- `PUT /posts/:id` - Update a post by id
+- `DELETE /posts/:id` - Delete a post by id
+
+- `POST /auth/register` - register a user
+- `POST /auth/login` - login and get access token
+
+## Authentication and Authorization
+
+- JWT and Passport are used for authentication
+- Users must register and login to create, update, or delete posts
+- Different roles (admin, editor, reader) are assigned to users
+
+## Unit Tests
+
+Run unit tests with:
+
+```bash
+npm run test
+npm run test:cov
+```
+I have 84.61% Funcs coverage
+
+##  Build and Production
+```bash
+npm run build
+npm run start:prod
+```
+
+## Scaling the User Service
+
+As the user base grows, it's essential to consider and implement strategies for scaling the user service. Below are potential strategies to handle increased loads:
+
+### 1. Load Balancing
+
+Implementing load balancing distributes incoming traffic across multiple instances of your application. This ensures that no single instance becomes a bottleneck and allows for better resource utilization.
+
+### 2. Database Sharding
+
+Database sharding involves horizontally partitioning your database to distribute data across multiple database servers. Each shard handles a subset of the data, reducing the load on individual database servers.
+
+### 3. Caching Mechanisms
+
+Utilize caching mechanisms to store frequently accessed data in a fast.
+
+### 4. Horizontal Scaling
+
+Consider deploying your application on multiple servers or containers to horizontally scale the user service.
+
+### 5. Content Delivery Networks (CDN)
+
+Use a Content Delivery Network to cache and deliver static assets, such as images and scripts, closer to users. This reduces latency and enhances the overall performance of your application.
+
+### 6. Efficient Indexing and Query Optimization
+
+Optimize database queries by ensuring proper indexing and analyzing query performance. This helps maintain fast response times even as the dataset grows.
+
+### 7. Autoscaling
+
+Leverage cloud providers' autoscaling features to automatically adjust the number of instances based on traffic and load. This ensures that your application can dynamically handle varying workloads.
